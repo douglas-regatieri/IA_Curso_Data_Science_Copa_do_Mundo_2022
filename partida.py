@@ -1,16 +1,19 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import random
 from scipy.stats import poisson
 
-st.title('Inteligência Artificial - Previsão Copa Qatar 2022')
+st.set_page_config(
+    page_title = 'Inteligência Artificial - Previsão Copa Qatar 2022',
+    page_icon = '⚽',
+)
 
 selecoes = pd.read_excel('DadosCopaDoMundoQatar2022.xlsx', sheet_name='selecoes', index_col=0)
 
 fifa = selecoes['PontosRankingFIFA'] #Transformação linear de escala numérica
 a, b = min(fifa), max(fifa)
 fa, fb = 0.15, 1
-
 b1 = (fb - fa)/(b-a)
 b0 = fb - b*b1
 forca = b0 + b1*fifa
